@@ -1,0 +1,77 @@
+graph TB
+    %% Main Application
+    USERTEG[USERTEG OSINT Tool] --> Banner[Banner Display]
+    USERTEG --> Folders[Folder Structure]
+    USERTEG --> Config[Config Manager]
+    USERTEG --> OSINT[OSINT Engine]
+    USERTEG --> Menu[Menu System]
+    
+    %% OSINT Engine Components
+    OSINT --> API[Telegram API]
+    OSINT --> DB[(SQLite Database)]
+    OSINT --> Monitor[Message Monitor]
+    
+    %% Database Schema
+    DB --> Users[users table]
+    DB --> UsernameHistory[username_history table]
+    DB --> Messages[messages table]
+    DB --> Chats[chats table]
+    DB --> UserActivity[user_activity table]
+    
+    %% Folder Structure
+    Folders --> DatabaseDir[database/]
+    Folders --> LogsDir[logs/]
+    Folders --> ExportsDir[exports/]
+    Folders --> DownloadsDir[downloads/]
+    Folders --> ConfigDir[config/]
+    Folders --> CacheDir[cache/]
+    
+    %% Downloads Subfolders
+    DownloadsDir --> ProfilesDir[profiles/]
+    DownloadsDir --> MediaDir[media/]
+    
+    %% Menu Options
+    Menu --> Intel[Intelligence Gathering]
+    Menu --> MonitorOpt[Real-time Monitoring]
+    Menu --> Analysis[Analysis & Reports]
+    Menu --> System[System Tools]
+    
+    %% Intelligence Submenu
+    Intel --> UserIntel[User Intelligence]
+    Intel --> UsernameSearch[Username Search]
+    Intel --> MessageHistory[Message History]
+    Intel --> KeywordSearch[Keyword Search]
+    
+    %% Monitoring Submenu
+    MonitorOpt --> StartMonitor[Start Monitoring]
+    MonitorOpt --> DBStats[Database Stats]
+    
+    %% Analysis Submenu
+    Analysis --> ChatAnalysis[Chat Analysis]
+    Analysis --> ExportData[Export Data]
+    
+    %% System Submenu
+    System --> ViewLogs[View Logs]
+    System --> BotInfo[Bot Info]
+    System --> Exit[Exit]
+    
+    %% API Endpoints
+    API --> GetMe[getMe]
+    API --> GetChat[getChat]
+    API --> GetChatMember[getChatMember]
+    API --> GetChatAdmins[getChatAdministrators]
+    API --> GetUpdates[getUpdates]
+    API --> GetUserPhotos[getUserProfilePhotos]
+    
+    %% Styling
+    classDef tool fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef database fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef api fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef folder fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef menu fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    class USERTEG,OSINT,Menu tool
+    class DB,Users,UsernameHistory,Messages,Chats,UserActivity database
+    class API,GetMe,GetChat,GetChatMember,GetChatAdmins,GetUpdates,GetUserPhotos api
+    class Folders,DatabaseDir,LogsDir,ExportsDir,DownloadsDir,ConfigDir,CacheDir,ProfilesDir,MediaDir folder
+    class Intel,MonitorOpt,Analysis,System,UserIntel,UsernameSearch,MessageHistory,KeywordSearch,StartMonitor,DBStats,ChatAnalysis,ExportData,ViewLogs,BotInfo,Exit menu
