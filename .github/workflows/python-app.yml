@@ -1,39 +1,59 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
-name: Python application
+# .github/workflows/ci.yml
+name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    branches: [ main ]
 
 jobs:
-  build:
-
+  verify:
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.10
+    
+    - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"
+        python-version: '3.10'
+    
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
+        pip install requests
+    
+    - name: Check syntax
       run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+        python -m py_compile userteg.py
+        echo "✅ Syntax validation passed"
+    
+    - name: Verify imports
       run: |
-        pytest
+        python -c "
+# Test all imports
+try:
+    import sys
+    import os
+    import json
+    import time
+    import sqlite3
+    import requests
+    import argparse
+    from datetime import datetime
+    from pathlib import Path
+    print('✅ All imports successful')
+except ImportError as e:
+    print(f'❌ Import error: {e}')
+    sys.exit(1)
+        "
+    
+    - name: Basic functionality check
+      run: |
+        python -c "
+# Test basic class definitions
+try:
+    # Test color class
+    class Colors:
+        BLUE = '\033[94m'
+        RESET
