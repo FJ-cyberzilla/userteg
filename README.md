@@ -1,4 +1,5 @@
 # Telegram User Osint
+[![CodeQL Advanced](https://github.com/FJ-cyberzilla/userteg/actions/workflows/codeql.yml/badge.svg)](https://github.com/FJ-cyberzilla/userteg/actions/workflows/codeql.yml)
 ```markdown
 # 🫆 USERTEG - Telegram OSINT Command Center
 
