@@ -1,0 +1,67 @@
+# USERTEG Git Ignore File
+
+# Data directories (should not be committed)
+userteg_data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Bot tokens and secrets
+*.token
+.env
+secrets.json
+config_private.json
+
+# Log files
+*.log
+logs/
+
+# Downloads and exports
+downloads/
+exports/
+cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backups
+backup/
+*.bak
+*.backup
+
+# Session files
+*.session
+*.pickle
